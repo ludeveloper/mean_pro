@@ -1,0 +1,26 @@
+{
+  "name": "studentface",
+  "version": "0.0.0",
+  "description": "students display their courses and grades",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludeveloper/mean_pro.git"
+  },
+  "keywords": [
+    "student"
+  ],
+  "author": "Lutfullah Ugurer <ludevelop@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ludeveloper/mean_pro/issues"
+  },
+  "homepage": "https://github.com/ludeveloper/mean_pro#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "jade": "^1.11.0"
+  }
+}
