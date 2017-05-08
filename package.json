@@ -4,7 +4,7 @@
   "description": "students display their courses and grades",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
   },
   "repository": {
     "type": "git",
@@ -13,6 +13,10 @@
   "keywords": [
     "student"
   ],
+  "engines":{
+    "node":"4.7.x",
+    "npm":"2.15.x"
+  }
   "author": "Lutfullah Ugurer <ludevelop@gmail.com>",
   "license": "ISC",
   "bugs": {
@@ -20,7 +24,20 @@
   },
   "homepage": "https://github.com/ludeveloper/mean_pro#readme",
   "dependencies": {
-    "express": "^4.15.2",
-    "jade": "^1.11.0"
+    "body-parser": "^1.17.1",
+    "express": "~3.4.4",
+    "jade": "~0.35.0",
+    "mongodb": "^2.2.26",
+    "morgan": "^1.8.1",
+    "pug": "^2.0.0-rc.1",
+    "mongoose": "~3.8.0",
+    "stylus": "~0.40.2"
+    //"express": "^4.15.2",
+    //"jade": "^1.11.0",
+    //"mongoose": "^4.9.7",
+    //"stylus": "^0.54.5"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0"
   }
 }

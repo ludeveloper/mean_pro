@@ -1,0 +1,21 @@
+{
+  "name": "studentface",
+  "description": "students display their courses and grades",
+  "main": "index.js",
+  "authors": [
+    "Lutfullah Ugurer <ludevelop@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "student"
+  ],
+  "homepage": "https://github.com/ludeveloper/mean_pro",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "toastr": "^2.1.3",
+    "angular": "1.2.0",
+    "angular-resource": "^1.6.4",
+    "angular-route": "^1.6.4"
+  }
+}
