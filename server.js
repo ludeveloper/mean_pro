@@ -1,75 +1,39 @@
 var express = require('express'),
-    assert = require('assert'),
-    stylus = require('stylus'),
-    logger = require('morgan'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    assert = require('assert');
 
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 var app = express();
 
-function compile(str, path){
-    return stylus(str).set('filename', path);
-}
+var config = require('./server/config/config')[env];
 
-app.set('views', __dirname + '/server/views');
-app.set('view engine', 'jade');
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(stylus.middleware(
-    {
-        src: __dirname + '/public',
-        compile: compile
-    }
-));
+require('./server/config/express')(app, config);
 
-app.use(express.static(__dirname + '/public'));
+require('./server/config/mongoose')(config);
+
+require('./server/config/passport')();
+
+require('./server/config/routes')(app);
 
 
-mongoose.connect('mongodb://st_user:Gd+CsYxn8_PE@ds121091.mlab.com:21091/student_oto');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error....'));
-db.once('open', function callback(){
-        console.log('studentface db opened');
-        
-    //     // following command is being tested
-    //     var BlogPost = new Schema({
-    //     teacher    : 'Joe',
-    //     course     : 'math',
-    //     stdID      : 1,
-    //     grade      : 96
-    // });
-});
 
-var messageSchema = mongoose.Schema({message: String});
-var Message = mongoose.model('Message', messageSchema);
-var mongoMessage;
+//require('connection_manager');
+
+
+// var messageSchema = mongoose.Schema({message: String});
+// var Message = mongoose.model('Message', messageSchema);
+// var mongoMessage;
 
 // Message.findOne().exec(function(err, messageDoc){
 //     mongoMessage = messageDoc.message;    
 // });
 
 
-app.get('/partials/:partialPath', function(req, res){
-    res.render('partials/', + req.params.partialPath);
-});
 
-// app.get('*', function(req, res) {
-//   res.render('index', {
-//     mongoMessage: mongoMessage
-//   });
-// });
+//var connectionManager = require("connectionManager");
+// connectionManager.connect();
 
-// var port = 3030;
-// app.listen(port);
-// console.log('Server is running, listening on port ' + port + '...');
-
-
-
-
-// var connectionManager = new ConnectionManager();
 // connectionManager.onConnectSuccessfully(function (db) {
 //     //if connection success then execute this:
 //     //.....
@@ -79,7 +43,6 @@ app.get('/partials/:partialPath', function(req, res){
 // connectionManager.onError(function () {
 //     console.log('Database connection err');
 // });
-// connectionManager.connect();
 
 
 //Find Documents with a Query Filter
@@ -100,17 +63,16 @@ var findDocuments = function(db, callback) {
       });
     });
   });      
-}
+};
 
 
-app.get('*', function(req, res) {
-  res.render('index', {
-    mongoMessage: mongoMessage
-  });
-});
+// app.get('*', function(req, res) {
+//   res.render('index', {
+//     mongoMessage: mongoMessage
+//   });
+// });
 
-var port = process.env.PORT || 3030;
-app.listen(port);
-console.log('Server is running, listening on port ' + port + '...');
+app.listen(config.port);
+console.log('Server is running, listening on port ' + config.port + '...');
 
 

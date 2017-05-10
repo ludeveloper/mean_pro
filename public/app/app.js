@@ -1,12 +1,27 @@
 angular.module('app', ['ngResource', 'ngRoute']);
 
 angular.module('app').config(function($routeProvider, $locationProvider) {
+    var routeRoleCheck = {
+     admin:  { auth: function(mvAuth) {
+         return mvAuth.authorizeCurrentUserForRoute('admin')
+        }}
+    }
+    
     $locationProvider.html5Mode(true);
     $routeProvider
-        .when('/', { templateUrl: '/partials/main', controller: 'mainCtrl'});
-        
+        .when('/', { templateUrl: '/partials/main/main', controller: 'mvMainCtrl'})
+        .when('/admin/users', { templateUrl: '/partials/admin/user-list',
+            controller: 'mvUserListCtrl', resolve: routeRoleCheck.admin
+            //------------
+            // after routeRoleCheck gives 'admin' as return,
+            // then /admin/users directory is being open
+        });
 });
 
-angular.module('app').contoller('mainCtrl', function($scope) {
-    $scope.myVar= "Hello Angular";
-});
+angular.module('app').run(function($rootScope, $location) {
+    $rootScope.$on('$routeChangeError', function(evt, current, previous, rejection) {
+        if(rejection === 'not authorized') {
+            $location.path('/');
+        }
+    });
+});  

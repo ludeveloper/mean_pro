@@ -1,7 +1,21 @@
 extends ../includes/layout
 
 block main-content
+    .navbar.navbar-inverse.navbar-fixed-top
+        .container
+            .navbar-header
+                a.navbar-brand(href="/") StudentFace
+                    h6 -Display Your Grades
+            .navbar-collapse.collapse
+                ul.navbar-nav
+                    li
+                        a(href="/") Home
+                div(ng-inclued="'partials/account/navbar-login'")
+            
     section.content
         div(ng-view)
-    h2 = mongoMessage
+
     h3 = docs
+
+    footer.container.text-center
+        p §copy; 2017 StudentFace | LuDeveloper Inc.

@@ -27,12 +27,10 @@ var insertDocuments = function(db, callback) {
     assert.equal(err, null);
     assert.equal(3, result.result.n);
     assert.equal(3, result.ops.length);
-    console.log("Inserted 3 documents into the collection succesfully");
+    console.log("Inserted 3 documents into the collection succesfully :)");
     callback(result);
   });
 }
-
-// send result to index
 
 
 
@@ -45,7 +43,7 @@ var insertDocuments = function(db, callback) {
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
-  console.log("Connected successfully to server");
+  console.log("Connected successfully to server on app.js");
 
   insertDocuments(db, function() {
     db.close();
@@ -221,7 +219,7 @@ var indexCollection = function(db, callback) {
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
-  console.log("Connected successfully to server");
+  console.log("Connected successfully to server with MongoClient in app.js");
 
   insertDocuments(db, function() {
     indexCollection(db, function() {
