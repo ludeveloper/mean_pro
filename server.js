@@ -1,8 +1,10 @@
-var express = require('express'),
+var express = require('express')
+  ,  MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
+var url = 'mongodb://std_user:Gd+CsYxn8_PE@ds121091.mlab.com:21091/student_oto';
 
 
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
@@ -12,7 +14,7 @@ require('./server/config/express')(app, config);
 
 require('./server/config/mongoose')(config);
 
-require('./server/config/passport')();
+require('./server/config/passport');
 
 require('./server/config/routes')(app);
 
@@ -50,9 +52,9 @@ require('./server/config/routes')(app);
 // Only the documents which match 'a' : 3 should be returned
 var findDocuments = function(db, callback) {
       // Get the documents collection
-      var collection = db.collection('documents');
+      var collection = db.collection('course');
       // Find some documents
-      collection.find({'ali': 3}).toArray(function(err, docs) {
+      collection.find({"Math": 9}).toArray(function(err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -66,11 +68,26 @@ var findDocuments = function(db, callback) {
 };
 
 
+
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  
+  
+  console.log("Connected successfully to server on app.js");
+
+  findDocuments(db, function() {
+    db.close();
+  });
+});
+
+
 // app.get('*', function(req, res) {
 //   res.render('index', {
 //     mongoMessage: mongoMessage
 //   });
 // });
+
+
 
 app.listen(config.port);
 console.log('Server is running, listening on port ' + config.port + '...');

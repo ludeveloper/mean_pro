@@ -5,17 +5,19 @@ block main-content
         .container
             .navbar-header
                 a.navbar-brand(href="/") StudentFace
-                    h6 -Display Your Grades
+                    h6 Display Your Grades
             .navbar-collapse.collapse
-                ul.navbar-nav
+                ul.nav.navbar-nav
                     li
                         a(href="/") Home
-                div(ng-inclued="'partials/account/navbar-login'")
-            
+                    li
+                        a(href="/courses") Courses
+                div(ng-include="'/partials/account/navbar-login'")
+    
     section.content
         div(ng-view)
 
-    h3 = docs
+    h3 LUTFULLAH
 
     footer.container.text-center
-        p §copy; 2017 StudentFace | LuDeveloper Inc.
+        p &copy; 2017 StudentFace | LuDeveloper Inc.
