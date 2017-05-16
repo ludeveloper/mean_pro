@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ludeveloper/mean_pro#readme",
   "dependencies": {
+    "@types/angular": "^1.6.17",
     "angular": "^1.6.4",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
@@ -29,6 +30,7 @@
     "mongoose": "^4.9.7",
     "morgan": "^1.8.1",
     "pug": "^2.0.0-rc.1",
+    "repair": "^0.1.1",
     "stylus": "^0.54.5"
   },
   "devDependencies": {

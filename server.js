@@ -1,10 +1,10 @@
-var express = require('express')
-  ,  MongoClient = require('mongodb').MongoClient,
+var express = require('express'),
+    MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
+
 var url = 'mongodb://std_user:Gd+CsYxn8_PE@ds121091.mlab.com:21091/student_oto';
 
-
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 var app = express();
 
@@ -19,7 +19,7 @@ require('./server/config/passport');
 require('./server/config/routes')(app);
 
 
-
+{
 //require('connection_manager');
 
 
@@ -45,6 +45,7 @@ require('./server/config/routes')(app);
 // connectionManager.onError(function () {
 //     console.log('Database connection err');
 // });
+}
 
 
 //Find Documents with a Query Filter
@@ -68,16 +69,15 @@ var findDocuments = function(db, callback) {
 };
 
 
-
 MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  
-  
-  console.log("Connected successfully to server on app.js");
-
-  findDocuments(db, function() {
-    db.close();
-  });
+    assert.equal(null, err);
+    
+    
+    console.log("Connected successfully to server on app.js");
+    
+    findDocuments(db, function() {
+        db.close();
+    });
 });
 
 
@@ -91,5 +91,7 @@ MongoClient.connect(url, function(err, db) {
 
 app.listen(config.port);
 console.log('Server is running, listening on port ' + config.port + '...');
+
+
 
 
